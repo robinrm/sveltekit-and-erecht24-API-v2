@@ -25,7 +25,7 @@
             <li><a href="/privacy_EN">Privacy English</a></li>
         </ul>
         to display your data or the data from your customer enter your apikey in
-        the 'apisetting.js' file for the specific site you want to change and set
+        the 'apisetting.ts' file for the specific site you want to change and set
         the test variable to false.
     </div>
 </section>
