@@ -1,7 +1,7 @@
 // since there's dynamic data here, we can't prerender
 export const prerender = false;
 
-import { pluginKeyUser, apiKeyUser, pluginKeyTest, apiKeyTest } from "$lib/stores/apisettings.js";
+import { pluginKeyUser, apiKeyUser, pluginKeyTest, apiKeyTest } from "$lib/stores/apisettings";
 
 const apiUrl = 'https://api.e-recht24.de/v2/privacyPolicy';
 const test = true;
