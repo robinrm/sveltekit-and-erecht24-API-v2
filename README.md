@@ -37,5 +37,6 @@ you can preview the production build by using
 
 ```bash
 npm run preview
+```
 
 > to deploy the project, you may need to install an different [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
