@@ -1,6 +1,6 @@
 ## Generall
 
-this is only an exapmple project to show the usage of the erecht24 APi version 2. 
+this is only an exapmple project to show the usage of the erecht24 API version 2. 
 
 > You can only get the imprint and privacy and display them on your page. There is no sync functionality implemented in this scripts. Also see the information in the landingpage!
 
