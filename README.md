@@ -1,10 +1,10 @@
 ## Generall
 
-this is only an exapmple project to show the usage of the erecht24 API version 2. 
+this is only an example project to show the usage of the erecht24 API version 2. 
 
 > You can only get the imprint and privacy and display them on your page. There is no sync functionality implemented in this scripts. Also see the information in the landingpage!
 
-For more details on how to use this APU see the documentation on `https://api-docs.e-recht24.de`
+For more details on how to use this API see the documentation on `https://api-docs.e-recht24.de`
 
 ## Installing the project
 
@@ -16,7 +16,7 @@ npm install
 
 ## Testing the project
 
-to test the project run
+to test the project use
 
 ```bash
 npm run dev
@@ -27,7 +27,7 @@ npm run dev -- --open
 
 ## Building the project
 
-to create a production version of the project use
+to create a production ready version of the project use
 
 ```bash
 npm run build
@@ -38,4 +38,4 @@ you can preview the production build by using
 ```bash
 npm run preview
 
-> to deploy the project, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+> to deploy the project, you may need to install an different [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
