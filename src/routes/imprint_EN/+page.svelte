@@ -14,6 +14,10 @@
     if (data.error == undefined) {
         let json_input = JSON.stringify(data.apidata.html_en, null, 4);
         json_input = json_input.replace(/\r?\n|\r/g, "");
+        json_input = json_input.replace(
+            /mustermann@musterfirma.de/gm,
+            "<a href=mailto:mustermann@musterfirma.de>mustermann@musterfirma.de</a>",
+        );
         // you can add as many replacements as you want here
         apidata_content = JSON.parse(json_input);
         display_api_data = true;
