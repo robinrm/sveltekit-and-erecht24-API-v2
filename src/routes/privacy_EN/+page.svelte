@@ -26,7 +26,6 @@
         json_input = json_input.replace(/\r?\n|\r/g, "");
         // you can add as many replacements as you want here
         apidata_content = JSON.parse(json_input);
-        display_api_data = true;
         display_api_data = false;
     }
 </script>

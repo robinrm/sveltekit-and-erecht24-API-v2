@@ -1,7 +1,10 @@
 {
 	"name": "erecht24apiv2",
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"type": "module",
+    "private": false,
+    "author": "Robin Meyer | Eickelmann & Meyer Industries GbR <contact@ecmin.de> (https://ecmin.de)",
+    "license": "GPL-3.0",
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
