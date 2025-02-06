@@ -1,7 +1,7 @@
 // since there's dynamic data here, we can't prerender
 export const prerender = false;
 
-import { pluginKeyUser, apiKeyUser, pluginKeyTest, apiKeyTest } from "$lib/stores/apisettings";
+import { pluginKeyUser, apiKeyUser, apiKeyTest } from "$lib/stores/apisettings";
 
 const apiUrl = 'https://api.e-recht24.de/v2/privacyPolicy';
 const test = true;
@@ -12,7 +12,7 @@ export const load = async ({ fetch }) => {
             const response = await fetch(apiUrl, {
                 headers: {
                     'eRecht24-api-key': apiKeyTest,
-                    'eRecht24-plugin-key': pluginKeyTest,
+                    'eRecht24-plugin-key': pluginKeyUser,
                     accept: 'application/json'
                 },
                 method: 'GET'
