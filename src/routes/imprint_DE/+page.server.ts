@@ -1,6 +1,7 @@
 // since there's dynamic data here, we can't prerender
 export const prerender = false;
 
+import { eR24Cache } from "$lib/cache";
 import { pluginKey, apiKeyUser, apiKeyTest, testmode } from "$lib/stores/apisettings";
 
 const apiUrl = 'https://api.e-recht24.de/v2/imprint';
@@ -8,6 +9,8 @@ const apiUrl = 'https://api.e-recht24.de/v2/imprint';
 export const load = async ({ fetch }) => {
     try {
         if (testmode) {
+            if (eR24Cache.has('site-notice')) return eR24Cache.get('site-notice');
+
             const response = await fetch(apiUrl, {
                 headers: {
                     'eRecht24-api-key': apiKeyTest,
@@ -17,9 +20,13 @@ export const load = async ({ fetch }) => {
                 method: 'GET'
             }
             )
+            
+            console.log("Request Sent");
+            
             if (response.ok) {
                 const apidata = await response.json()
-                return { apidata };
+                eR24Cache.set('site-notice', {apidata: apidata})
+                return eR24Cache.get('site-notice');
             } else {
                 throw new Error(`${response.status}`)
             }
