@@ -1,7 +1,10 @@
 <script lang="ts">
     import "../app.css";
     import BackToTop from "$lib/components/BackToTop.svelte";
-    import { page } from "$app/stores";
+    import { page } from "$app/state";
+
+    export const target = "_blank";
+    export const rel = "noopener noreferrer";
 </script>
 
 <div class="app">
@@ -10,7 +13,7 @@
     </main>
 
     <footer>
-        {#if $page.url.pathname === "/"}{:else}<div>
+        {#if page.url.pathname === "/"}{:else}<div>
                 Back to <a href="/">Home</a>.
             </div>
         {/if}

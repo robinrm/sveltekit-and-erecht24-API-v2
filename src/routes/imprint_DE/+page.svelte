@@ -1,33 +1,60 @@
 <script lang="ts">
     import "./style.css";
-
-    import * as offline_data from "$lib/stores/imprint.json";
+    import { onMount } from "svelte";
+    import { fetchERecht24Api } from "$lib/components/apirequest";
+    import type { ApiResponse } from "$lib/components/apirequest";
+    import { urlImprint } from "$lib/stores/apisettings";
     import logo from "$lib/images/seal_copyright.png";
 
-    export let data;
     export let target = "_blank";
     export let rel = "noopener noreferrer";
 
-    let apidata_content = "false";
-    let display_api_data = null;
+    // set languages de or en
+    const language: "en" | "de" = "de";
 
-    if (data.error == undefined) {
-        let json_input = JSON.stringify(data.apidata.html_de, null, 4);
-        json_input = json_input.replace(/\r?\n|\r/g, "");
-        json_input = json_input.replace(
-            /mustermann@musterfirma.de/gm,
-            "<a href=mailto:mustermann@musterfirma.de>mustermann@musterfirma.de</a>",
-        );
-        // you can add as many replacements as you want here,
-        apidata_content = JSON.parse(json_input);
-        display_api_data = true;
-    } else {
-        let json_input = JSON.stringify(offline_data.html_de, null, 4);
-        json_input = json_input.replace(/\r?\n|\r/g, "");
-        // you can add as many replacements as you want here
-        apidata_content = JSON.parse(json_input);
-        display_api_data = false;
+    let apiResponse: ApiResponse | null = null;
+    let apidata_content: string = "";
+    let apidata_date: string | undefined = "false";
+    let json_input: string | undefined = undefined;
+    let display_api_data = false;
+
+    async function loadApiData() {
+        apiResponse = await fetchERecht24Api(urlImprint);
+        if (apiResponse.apidata) {
+            if (language == "de") {
+                json_input = JSON.stringify(
+                    apiResponse.apidata.html_de,
+                    null,
+                    4,
+                );
+            } else if (language == "en") {
+                json_input = JSON.stringify(
+                    apiResponse.apidata.html_en,
+                    null,
+                    4,
+                );
+            }
+            if (json_input) {
+                json_input = json_input.replace(/\r?\n|\r/g, "");
+                json_input = json_input.replace(
+                    /mustermann@musterfirma.de/gm,
+                    "<a href=mailto:mustermann@musterfirma.de>mustermann@musterfirma.de</a>",
+                );
+                // you can add as many replacements as you want here
+                apidata_content = JSON.parse(json_input);
+                apidata_date = apiResponse.apidata.modified;
+                display_api_data = true;
+            }
+        } else if (apiResponse.error) {
+            apidata_content = apiResponse.error;
+            display_api_data = false;
+        }
     }
+
+    onMount(() => {
+        // Load the API data when the component mounts
+        loadApiData();
+    });
 </script>
 
 <svelte:head>
@@ -42,17 +69,9 @@
     <p>
         {#if display_api_data}
             {@html apidata_content}
-            Letzte Änderung: {@html data.apidata.modified}
+            Letzte Änderung: {@html apidata_date}
         {:else}
             {@html apidata_content}
-            Letzte Änderung: {@html offline_data.modified}
-            <br class="inline-breack" />
-            Daten konnten nicht aktuallisiert werden.
-            <br class="inline-breack" />
-            <hgl class="highlight_error">Error: {data.error}</hgl>
-            <br class="inline-breack" />
-            Für weitere Informationen siehe:
-            <a href="https://api-docs.e-recht24.de/" {target} {rel}>API Doku</a>
         {/if}
         <br class="inline-breack" />
         <a

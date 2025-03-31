@@ -1,0 +1,1 @@
+const e=""+new URL("../assets/seal_copyright.mYrqkTYa.png",import.meta.url).href;export{e as l};
