@@ -31,16 +31,10 @@ export async function fetchERecht24Api(apiUrl: string): Promise<ApiResponse> {
             return { apidata };
         } else {
             console.log(response.status);
-            // return { error: `${response.status}` };
             throw new Error(`${response.status}`)
         }
     } catch (error) {
         console.log(error);
-        if (error == 'Error: 401') {
-            errorMessage = 'Invalid API key and/or Plugin key for the eRecht24 API v2.';
-            return { error: errorMessage }
-        }
-
         if (error == 'Error: 400') {
             errorMessage = 'No clients found for api-key.';
             return { error: errorMessage }
@@ -82,7 +76,7 @@ export async function fetchERecht24Api(apiUrl: string): Promise<ApiResponse> {
             return { error: errorMessage }
         }
 
-        //not matches
+        //not matching any of the above errors
         errorMessage = 'Unknown error, see dokumentation https://api-docs.e-recht24.de/. Errorcode: ' + error;
         return { error: errorMessage }
 
