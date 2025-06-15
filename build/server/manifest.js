@@ -7,18 +7,17 @@ function __memo(fn) {
 return {
 	appDir: "_app",
 	appPath: "_app",
-	assets: new Set(["favicon.png"]),
-	mimeTypes: {".png":"image/png"},
+	assets: new Set(["apidata/imprint.json","apidata/lastpull-imprint.log","apidata/lastpull-privacy.log","apidata/privacy.json","favicon.png"]),
+	mimeTypes: {".json":"application/json",".log":"text/plain",".png":"image/png"},
 	_: {
-		client: {start:"_app/immutable/entry/start.koq5s7V-.js",app:"_app/immutable/entry/app.BxnIeZYe.js",imports:["_app/immutable/entry/start.koq5s7V-.js","_app/immutable/chunks/CTVDkcWg.js","_app/immutable/chunks/BbrY2rfu.js","_app/immutable/chunks/Dnln1GsD.js","_app/immutable/entry/app.BxnIeZYe.js","_app/immutable/chunks/BbrY2rfu.js","_app/immutable/chunks/BruzhX4F.js","_app/immutable/chunks/CjyUIBZi.js","_app/immutable/chunks/d1PZQcUy.js","_app/immutable/chunks/DdaFM6B8.js","_app/immutable/chunks/cwAgvQ1A.js","_app/immutable/chunks/Dnln1GsD.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
+		client: {start:"_app/immutable/entry/start.DOhKCv0D.js",app:"_app/immutable/entry/app.rAekvw_9.js",imports:["_app/immutable/entry/start.DOhKCv0D.js","_app/immutable/chunks/C8E--EF8.js","_app/immutable/chunks/DyjbJ_Nr.js","_app/immutable/chunks/Dw38WHNR.js","_app/immutable/entry/app.rAekvw_9.js","_app/immutable/chunks/DyjbJ_Nr.js","_app/immutable/chunks/DkCPv214.js","_app/immutable/chunks/zKfbbJIh.js","_app/immutable/chunks/DbDjbU46.js","_app/immutable/chunks/DoJ4FQ80.js","_app/immutable/chunks/ozF4whhL.js","_app/immutable/chunks/DcUZX_cE.js","_app/immutable/chunks/Dw38WHNR.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
 		nodes: [
-			__memo(() => import('./chunks/0-BDGPg1pF.js')),
-			__memo(() => import('./chunks/1-DE1WMSQ7.js')),
-			__memo(() => import('./chunks/3-CbiIMoPY.js')),
-			__memo(() => import('./chunks/4-DYavqVCw.js')),
-			__memo(() => import('./chunks/5-DcYY0bau.js')),
-			__memo(() => import('./chunks/6-bImpHJ38.js')),
-			__memo(() => import('./chunks/7-9fcizJea.js'))
+			__memo(() => import('./chunks/0-DuKQTFyv.js')),
+			__memo(() => import('./chunks/1-qAEmFWuW.js')),
+			__memo(() => import('./chunks/3-TXqGd07K.js')),
+			__memo(() => import('./chunks/4-CMI-nxxh.js')),
+			__memo(() => import('./chunks/5-BO8zeaw7.js')),
+			__memo(() => import('./chunks/6-CcToIMxj.js'))
 		],
 		routes: [
 			{
@@ -47,13 +46,6 @@ return {
 				pattern: /^\/privacy_EN\/?$/,
 				params: [],
 				page: { layouts: [0,], errors: [1,], leaf: 5 },
-				endpoint: null
-			},
-			{
-				id: "/test",
-				pattern: /^\/test\/?$/,
-				params: [],
-				page: { layouts: [0,], errors: [1,], leaf: 6 },
 				endpoint: null
 			}
 		],

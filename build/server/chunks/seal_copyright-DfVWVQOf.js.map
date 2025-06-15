@@ -1,1 +1,0 @@
-{"version":3,"file":"seal_copyright-DfVWVQOf.js","sources":["../../../.svelte-kit/adapter-node/chunks/seal_copyright.js"],"sourcesContent":["const logo = \"/_app/immutable/assets/seal_copyright.mYrqkTYa.png\";\nexport {\n  logo as l\n};\n"],"names":[],"mappings":"AAAK,MAAC,IAAI,GAAG;;;;"}

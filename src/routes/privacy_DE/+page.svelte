@@ -1,10 +1,8 @@
 <script lang="ts">
-    import "./style.css";
+    import { page } from "$app/state";
     import { onMount } from "svelte";
-    import { fetchERecht24Api } from "$lib/components/apirequest";
-    import type { ApiResponse } from "$lib/components/apirequest";
-    import { urlPrivacy } from "$lib/stores/apisettings";
     import logo from "$lib/images/seal_privacy.png";
+    import "./style.css";
 
     export let target = "_blank";
     export let rel = "noopener noreferrer";
@@ -12,48 +10,38 @@
     // set languages de or en
     const language: "en" | "de" = "de";
 
-    let apiResponse: ApiResponse | null = null;
+    let loading = true;
+    let input: string | undefined = undefined;
     let apidata_content: string = "";
     let apidata_date: string | undefined = "false";
-    let json_input: string | undefined = undefined;
-    let display_api_data = false;
 
-    async function loadApiData() {
-        apiResponse = await fetchERecht24Api(urlPrivacy);
-        if (apiResponse.apidata) {
+    onMount(async () => {
+        try {
+            await page.data.privacy;
+        } finally {
+            loading = false;
+
             if (language == "de") {
-                json_input = JSON.stringify(
-                    apiResponse.apidata.html_de,
-                    null,
-                    4,
-                );
+                input = page.data.privacy
+                    ? JSON.stringify(page.data.privacy.html_de, null, 4)
+                    : "No data available";
             } else if (language == "en") {
-                json_input = JSON.stringify(
-                    apiResponse.apidata.html_en,
-                    null,
-                    4,
-                );
+                input = page.data.privacy
+                    ? JSON.stringify(page.data.privacy.html_en, null, 4)
+                    : "No data available";
             }
-            if (json_input) {
-                json_input = json_input.replace(/\r?\n|\r/g, "");
-                json_input = json_input.replace(
+
+            if (input) {
+                input = input.replace(/\r?\n|\r/g, "");
+                input = input.replace(
                     /info@beispielfirma.de/gm,
-                    "<a href=mailto:info@beispielfirma.de>info@beispielfirma.de</a>",
+                    "<a href=mailto:info@beispielfirma.de>info@beispielfirma.de</a>"
                 );
                 // you can add as many replacements as you want here
-                apidata_content = JSON.parse(json_input);
-                apidata_date = apiResponse.apidata.modified;
-                display_api_data = true;
+                apidata_content = JSON.parse(input);
+                apidata_date = page.data.privacy.modified;
             }
-        } else if (apiResponse.error) {
-            apidata_content = apiResponse.error;
-            display_api_data = false;
         }
-    }
-
-    onMount(() => {
-        // Load the API data when the component mounts
-        loadApiData();
     });
 </script>
 
@@ -66,23 +54,39 @@
 </svelte:head>
 
 <section class="content">
-    <p>
-        {#if display_api_data}
+    <div>
+        {#if loading}
+            Lade Daten, einen Moment bitte ...
+        {:else if page.data.error != null && page.data.privacy == null}
+            <p class="highlight_error">{page.data.error}</p>
+            Please try again later or contact admin if problem keeps happening.
+        {:else if page.data.error != null && page.data.privacy != null}
             {@html apidata_content}
             Letzte Änderung: {@html apidata_date}
+            <p class="highlight_error">{page.data.error}</p>
+            <br class="inline-breack" />
+            <a
+                href="https://ecmin.click/erecht24"
+                class="nolink"
+                {target}
+                {rel}
+            >
+                <img src={logo} alt="Vertreten durch die eRecht24 GmbH" /></a
+            >
         {:else}
             {@html apidata_content}
+            Letzte Änderung: {@html apidata_date}
+            <br class="inline-breack" />
+            <a
+                href="https://ecmin.click/erecht24"
+                class="nolink"
+                {target}
+                {rel}
+            >
+                <img src={logo} alt="Vertreten durch die eRecht24 GmbH" /></a
+            >
         {/if}
-        <br class="inline-breack" />
-        <a
-            href="https://www.digistore24.com/redir/174027/ecmin_gbr/"
-            class="nolink"
-            {target}
-            {rel}
-        >
-            <img src={logo} alt="Vertreten durch die eRecht24 GmbH" /></a
-        >
-    </p>
+    </div>
 </section>
 
 <style>

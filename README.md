@@ -1,6 +1,6 @@
 ## Generall
 
-this is only an example project to show the usage of the erecht24 API version 2. 
+this is only an example project to show the usage of the erecht24 API version 2.
 
 > You can only get the imprint and privacy and display them on your page. There is no sync or push functionality implemented in this scripts. Also see the information in the landingpage!
 
@@ -24,6 +24,8 @@ npm run dev
 # or start the server and open the app in a new browser tab
 npm run dev -- --open
 ```
+
+> add your project key from erecht24 to apisettings.ts and disable test mode to display your date.
 
 ## Building the project
 

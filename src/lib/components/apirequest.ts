@@ -34,7 +34,7 @@ export async function fetchERecht24Api(apiUrl: string): Promise<ApiResponse> {
             throw new Error(`${response.status}`)
         }
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         if (error == 'Error: 400') {
             errorMessage = 'No clients found for api-key.';
             return { error: errorMessage }
