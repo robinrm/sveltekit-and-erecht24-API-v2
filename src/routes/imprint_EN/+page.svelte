@@ -8,40 +8,35 @@
     export const rel = "noopener noreferrer";
 
     // set languages de or en
-    let language: "en" | "de" = "en";
+    const language: "en" | "de" = "en";
 
     let loading = true;
-    let input: string | undefined = undefined;
     let apidata_content: string = "";
-    let apidata_date: string | undefined = "false";
+    let apidata_date: string | undefined = undefined;
 
-    onMount(async () => {
+    async function updateContent() {
         try {
-            await page.data.imprint;
+            await page.data.APIcontent;
         } finally {
+            let input =
+                language === "de"
+                    ? page.data.APIcontent.html_de
+                    : page.data.APIcontent.html_en;
+
+            input = input.replace(/\r?\n|\r/g, "");
+            input = input.replace(
+                /mustermann@musterfirma.de/gm,
+                '<a href="mailto:mustermann@musterfirma.de">mustermann@musterfirma.de</a>'
+            );
+
+            apidata_content = input;
+            apidata_date = page.data.APIcontent.modified;
             loading = false;
-
-            if (language == "de") {
-                input = page.data.imprint
-                    ? JSON.stringify(page.data.imprint.html_de, null, 4)
-                    : "No data available";
-            } else if (language == "en") {
-                input = page.data.imprint
-                    ? JSON.stringify(page.data.imprint.html_en, null, 4)
-                    : "No data available";
-            }
-
-            if (input) {
-                input = input.replace(/\r?\n|\r/g, "");
-                input = input.replace(
-                    /mustermann@musterfirma.de/gm,
-                    "<a href=mailto:mustermann@musterfirma.de>mustermann@musterfirma.de</a>"
-                );
-                // you can add as many replacements as you want here
-                apidata_content = JSON.parse(input);
-                apidata_date = page.data.imprint.modified;
-            }
         }
+    }
+
+    onMount(() => {
+        updateContent();
     });
 </script>
 
@@ -57,10 +52,10 @@
     <div>
         {#if loading}
             loading data, please wait ...
-        {:else if page.data.error != null && page.data.imprint == null}
+        {:else if page.data.error != null && page.data.APIcontent == null}
             <p class="highlight_error">{page.data.error}</p>
             Please try again later or contact admin if problem keeps happening.
-        {:else if page.data.error != null && page.data.imprint != null}
+        {:else if page.data.error != null && page.data.APIcontent != null}
             {@html apidata_content}
             last changes: {@html apidata_date}
             <p class="highlight_error">{page.data.error}</p>

@@ -11,37 +11,32 @@
     const language: "en" | "de" = "en";
 
     let loading = true;
-    let input: string | undefined = undefined;
     let apidata_content: string = "";
-    let apidata_date: string | undefined = "false";
+    let apidata_date: string | undefined = undefined;
 
-    onMount(async () => {
+    async function updateContent() {
         try {
-            await page.data.privacy;
+            await page.data.APIcontent;
         } finally {
+            let input =
+                language === "de"
+                    ? page.data.APIcontent.html_de
+                    : page.data.APIcontent.html_en;
+
+            input = input.replace(/\r?\n|\r/g, "");
+            input = input.replace(
+                /info@beispielfirma.de/gm,
+                "<a href=mailto:info@beispielfirma.de>info@beispielfirma.de</a>"
+            );
+
+            apidata_content = input;
+            apidata_date = page.data.APIcontent.modified;
             loading = false;
-
-            if (language == "de") {
-                input = page.data.privacy
-                    ? JSON.stringify(page.data.privacy.html_de, null, 4)
-                    : "No data available";
-            } else if (language == "en") {
-                input = page.data.privacy
-                    ? JSON.stringify(page.data.privacy.html_en, null, 4)
-                    : "No data available";
-            }
-
-            if (input) {
-                input = input.replace(/\r?\n|\r/g, "");
-                input = input.replace(
-                    /info@beispielfirma.de/gm,
-                    "<a href=mailto:info@beispielfirma.de>info@beispielfirma.de</a>"
-                );
-                // you can add as many replacements as you want here
-                apidata_content = JSON.parse(input);
-                apidata_date = page.data.privacy.modified;
-            }
         }
+    }
+
+    onMount(() => {
+        updateContent();
     });
 </script>
 
@@ -57,10 +52,10 @@
     <div>
         {#if loading}
             loading data, please wait ...
-        {:else if page.data.error != null && page.data.privacy == null}
+        {:else if page.data.error != null && page.data.APIcontent == null}
             <p class="highlight_error">{page.data.error}</p>
             Please try again later or contact admin if problem keeps happening.
-        {:else if page.data.error != null && page.data.privacy != null}
+        {:else if page.data.error != null && page.data.APIcontent != null}
             {@html apidata_content}
             last changes: {@html apidata_date}
             <p class="highlight_error">{page.data.error}</p>
