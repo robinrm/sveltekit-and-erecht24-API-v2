@@ -8,15 +8,11 @@ import type { CheckPullResponse } from "$lib/components/checkpullrequest";
 
 import { fetchERecht24Api } from "$lib/components/apirequest";
 import type { ApiResponse } from "$lib/components/apirequest";
-import { urlImprint } from "$lib/stores/apisettings";
-
-const LastPullLog = './static/apidata/lastpull-imprint.log';
-const ContentFilePath = './static/apidata/imprint.json';
-const TimeLimit = 1800000; // 30 minutes in ms
+import { urlImprint, TimeLimit, LastPullLogImprint, ContentFilePathImprint } from "$lib/stores/apisettings";
 
 export async function load() {
     try {
-        let pullresponse: CheckPullResponse | null = await CheckPullRequest(LastPullLog, ContentFilePath, TimeLimit);
+        let pullresponse: CheckPullResponse | null = await CheckPullRequest(LastPullLogImprint, ContentFilePathImprint, TimeLimit);
         let APIcontent: string | null = null;
 
         if (pullresponse.fileExists) {
@@ -29,8 +25,8 @@ export async function load() {
 
             if (apiResponse.apidata) {
                 const json = JSON.stringify(apiResponse.apidata, null, 2);
-                await writeFile(ContentFilePath, json, 'utf-8');
-                await writeFile(LastPullLog, new Date().toISOString(), 'utf8');
+                await writeFile(ContentFilePathImprint, json, 'utf-8');
+                await writeFile(LastPullLogImprint, new Date().toISOString(), 'utf8');
                 return { APIcontent: apiResponse.apidata };
             } else {
                 // console.log("API Imprint Error:", APIcontent.error);
@@ -38,7 +34,7 @@ export async function load() {
             }
 
         } else {
-            // console.log("Imprint: Using cached data.");
+            console.log("Imprint: Using cached data.");
             return { APIcontent: APIcontent ? JSON.parse(APIcontent) : null };
         }
 

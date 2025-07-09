@@ -8,15 +8,11 @@ import type { CheckPullResponse } from "$lib/components/checkpullrequest";
 
 import { fetchERecht24Api } from "$lib/components/apirequest";
 import type { ApiResponse } from "$lib/components/apirequest";
-import { urlPrivacy } from "$lib/stores/apisettings";
-
-const LastPullLog = './static/apidata/lastpull-privacy.log';
-const ContentFilePath = './static/apidata/privacy.json';
-const TimeLimit = 1800000; // 30 minutes in ms
+import { urlPrivacy, TimeLimit, LastPullLogPrivacy, ContentFilePathPrivacy } from "$lib/stores/apisettings";
 
 export async function load() {
     try {
-        let pullresponse: CheckPullResponse | null = await CheckPullRequest(LastPullLog, ContentFilePath, TimeLimit);
+        let pullresponse: CheckPullResponse | null = await CheckPullRequest(LastPullLogPrivacy, ContentFilePathPrivacy, TimeLimit);
         let APIcontent: string | null = null;
 
         if (pullresponse.fileExists) {
@@ -29,8 +25,8 @@ export async function load() {
 
             if (apiResponse.apidata) {
                 const json = JSON.stringify(apiResponse.apidata, null, 2);
-                await writeFile(ContentFilePath, json, 'utf-8');
-                await writeFile(LastPullLog, new Date().toISOString(), 'utf8');
+                await writeFile(ContentFilePathPrivacy, json, 'utf-8');
+                await writeFile(LastPullLogPrivacy, new Date().toISOString(), 'utf8');
                 return { APIcontent: apiResponse.apidata };
             } else {
                 // console.log("API Privacy Error:", APIcontent.error);
@@ -38,7 +34,7 @@ export async function load() {
             }
 
         } else {
-            // console.log("Privacy: Using cached data.");
+            console.log("Privacy: Using cached data.");
             return { APIcontent: APIcontent ? JSON.parse(APIcontent) : null };
         }
 
