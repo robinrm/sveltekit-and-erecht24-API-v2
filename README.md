@@ -25,7 +25,7 @@ npm run dev
 npm run dev -- --open
 ```
 
-> add your project key from erecht24 to apisettings.ts and disable test mode to display your date.
+> add your project key from erecht24 to apisettings.ts and disable test mode to display your data.
 
 ## Building the project
 

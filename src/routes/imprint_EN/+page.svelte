@@ -13,25 +13,38 @@
     let loading = true;
     let apidata_content: string = "";
     let apidata_date: string | undefined = undefined;
+    let input_empty = false;
 
     async function updateContent() {
         try {
             await page.data.APIcontent;
         } finally {
-            let input =
-                language === "de"
-                    ? page.data.APIcontent.html_de
-                    : page.data.APIcontent.html_en;
+            if (page.data.error == null && page.data.APIcontent != null) {
+                let input =
+                    language === "de"
+                        ? page.data.APIcontent.html_de
+                        : page.data.APIcontent.html_en;
 
-            input = input.replace(/\r?\n|\r/g, "");
-            input = input.replace(
-                /mustermann@musterfirma.de/gm,
-                '<a href="mailto:mustermann@musterfirma.de">mustermann@musterfirma.de</a>'
-            );
+                if (input == null || input === "") {
+                    input_empty = true;
+                    loading = false;
+                    return;
+                }
 
-            apidata_content = input;
-            apidata_date = page.data.APIcontent.modified;
-            loading = false;
+                input = input.replace(/\r?\n|\r/g, "");
+                input = input.replace(
+                    /mustermann@musterfirma.de/gm,
+                    '<a href="mailto:mustermann@musterfirma.de">mustermann@musterfirma.de</a>',
+                );
+                // you can add as many replacements as you want here
+
+                apidata_content = input;
+                apidata_date = page.data.APIcontent.modified;
+                loading = false;
+            } else {
+                console.error("Failed to fetch API data", page.data.error);
+                loading = false;
+            }
         }
     }
 
@@ -53,6 +66,7 @@
         {#if loading}
             loading data, please wait ...
         {:else if page.data.error != null && page.data.APIcontent == null}
+            <h1>Imprint</h1>
             <p class="highlight_error">{page.data.error}</p>
             Please try again later or contact admin if problem keeps happening.
         {:else if page.data.error != null && page.data.APIcontent != null}
@@ -68,6 +82,11 @@
             >
                 <img src={logo} alt="represented by eRecht24 GmbH" /></a
             >
+        {:else if input_empty}
+            <h1>Imprint</h1>
+            <p>
+                Content from API is empty. Check your Data in eRecht24 Account.
+            </p>
         {:else}
             {@html apidata_content}
             last changes: {@html apidata_date}

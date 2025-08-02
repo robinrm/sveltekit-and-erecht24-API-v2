@@ -29,12 +29,12 @@ export async function load() {
                 await writeFile(LastPullLogPrivacy, new Date().toISOString(), 'utf8');
                 return { APIcontent: apiResponse.apidata };
             } else {
-                // console.log("API Privacy Error:", APIcontent.error);
+                // console.log("API Privacy Error:", apiResponse.error);
                 return { APIcontent: APIcontent ? JSON.parse(APIcontent) : null, error: apiResponse.error };
             }
 
         } else {
-            console.log("Privacy: Using cached data.");
+            // console.log("Privacy: Using cached data.");
             return { APIcontent: APIcontent ? JSON.parse(APIcontent) : null };
         }
 
