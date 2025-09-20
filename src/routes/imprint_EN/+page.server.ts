@@ -1,7 +1,7 @@
 // since there's dynamic data here, we can't prerender
 export const prerender = false;
 
-import { writeFile } from 'fs/promises';
+import { writeFile } from 'node:fs/promises';
 
 import { CheckPullRequest } from "$lib/components/checkpullrequest";
 import type { CheckPullResponse } from "$lib/components/checkpullrequest";
