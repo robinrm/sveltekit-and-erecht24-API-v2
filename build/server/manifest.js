@@ -10,15 +10,18 @@ return {
 	assets: new Set(["apidata/imprint.json","apidata/lastpull-imprint.log","apidata/lastpull-privacy.log","apidata/privacy.json","favicon.png"]),
 	mimeTypes: {".json":"application/json",".log":"text/plain",".png":"image/png"},
 	_: {
-		client: {start:"_app/immutable/entry/start.DqF2N7O2.js",app:"_app/immutable/entry/app.DBX2eiCp.js",imports:["_app/immutable/entry/start.DqF2N7O2.js","_app/immutable/chunks/6o6Qvvgu.js","_app/immutable/chunks/D65nL8m3.js","_app/immutable/chunks/DSze3bgh.js","_app/immutable/entry/app.DBX2eiCp.js","_app/immutable/chunks/D65nL8m3.js","_app/immutable/chunks/CutkM_hP.js","_app/immutable/chunks/lwbMhMiE.js","_app/immutable/chunks/CIoTbYV3.js","_app/immutable/chunks/BntLBAS7.js","_app/immutable/chunks/NcKODrK9.js","_app/immutable/chunks/Blc4UyLb.js","_app/immutable/chunks/DSze3bgh.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
+		client: {start:"_app/immutable/entry/start.Copu1IqN.js",app:"_app/immutable/entry/app.BaV5XZBZ.js",imports:["_app/immutable/entry/start.Copu1IqN.js","_app/immutable/chunks/BHrqZzbu.js","_app/immutable/chunks/DSIQN05n.js","_app/immutable/chunks/CxaBVJg1.js","_app/immutable/entry/app.BaV5XZBZ.js","_app/immutable/chunks/DSIQN05n.js","_app/immutable/chunks/XtHQpmrf.js","_app/immutable/chunks/B2YaYGee.js","_app/immutable/chunks/Bl9b3Z-2.js","_app/immutable/chunks/CxaBVJg1.js","_app/immutable/chunks/D1cgDPj7.js","_app/immutable/chunks/hlBhQlEl.js"],stylesheets:[],fonts:[],uses_env_dynamic_public:false},
 		nodes: [
-			__memo(() => import('./chunks/0-BqlqK7O1.js')),
-			__memo(() => import('./chunks/1-Qt6rTcgy.js')),
-			__memo(() => import('./chunks/3-Bi_1lMw-.js')),
-			__memo(() => import('./chunks/4-CIxlIcw1.js')),
-			__memo(() => import('./chunks/5-CYPjXQKM.js')),
-			__memo(() => import('./chunks/6-Cw7QHisq.js'))
+			__memo(() => import('./chunks/0-CfoQGNNt.js')),
+			__memo(() => import('./chunks/1-B4eZ0UyU.js')),
+			__memo(() => import('./chunks/3-gRDtvYo_.js')),
+			__memo(() => import('./chunks/4-BKnvY1gW.js')),
+			__memo(() => import('./chunks/5-B-b3J2sc.js')),
+			__memo(() => import('./chunks/6-4f6eXE3j.js'))
 		],
+		remotes: {
+			
+		},
 		routes: [
 			{
 				id: "/imprint_DE",
