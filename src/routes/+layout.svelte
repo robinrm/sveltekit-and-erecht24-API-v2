@@ -1,6 +1,6 @@
 <script lang="ts">
     import "../app.css";
-    import BackToTop from "$lib/components/BackToTop.svelte";
+    import BackToTop from "$lib/components/layout/BackToTop.svelte";
     import { page } from "$app/state";
 
     export const target = "_blank";

@@ -1,6 +1,6 @@
 {
     "name": "erecht24apiv2",
-    "version": "1.0.2",
+    "version": "1.0.8",
     "type": "module",
     "private": false,
     "author": "Robin Meyer | Eickelmann & Meyer Industries GbR <contact@ecmin.de> (https://ecmin.de)",
@@ -10,14 +10,18 @@
         "build": "vite build",
         "preview": "vite preview"
     },
+    "engines": {
+        "node": ">=25.0.0",
+        "npm": ">=11.0.0"
+    },
     "devDependencies": {
         "@sveltejs/adapter-node": "^5.4.0",
-        "@sveltejs/kit": "^2.49.1",
+        "@sveltejs/kit": "^2.49.2",
         "@sveltejs/vite-plugin-svelte": "^6.2.1",
-        "@types/node": "^24.10.1",
-        "svelte": "^5.45.6",
+        "@types/node": "^25.0.3",
+        "svelte": "^5.46.1",
         "typescript": "^5.9.3",
-        "vite": "^7.2.6"
+        "vite": "^7.3.0"
     },
     "dependencies": {
         "sveltekit-helmet": "^2.1.0"

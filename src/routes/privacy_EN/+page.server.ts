@@ -3,11 +3,11 @@ export const prerender = false;
 
 import { writeFile } from 'fs/promises';
 
-import { CheckPullRequest } from "$lib/components/checkpullrequest";
-import type { CheckPullResponse } from "$lib/components/checkpullrequest";
+import { CheckPullRequest } from "$lib/components/api/checkpullrequest";
+import type { CheckPullResponse } from "$lib/components/api/checkpullrequest";
 
-import { fetchERecht24Api } from "$lib/components/apirequest";
-import type { ApiResponse } from "$lib/components/apirequest";
+import { fetchERecht24Api } from "$lib/components/api/apirequest";
+import type { ApiResponse } from "$lib/components/api/apirequest";
 import { urlPrivacy, TimeLimit, LastPullLogPrivacy, ContentFilePathPrivacy } from "$lib/stores/apisettings";
 
 export async function load() {
