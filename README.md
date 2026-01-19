@@ -4,13 +4,15 @@
 
 this is only an example project to show the usage of the erecht24 API version 2.
 
+> You're not able to installt this project with npm -i xyz. You need to download the latest relase and copy the code in your project!
+
 > You can only get the imprint and privacy and display them on your page. There is no sync or push functionality implemented in this scripts. Also see the information in the landingpage!
 
 For more details on how to use this API see the documentation on `https://api-docs.e-recht24.de`
 
 ## Installing the project
 
-to install the project use
+to install the donloaded project use:
 
 ```bash
 npm install
@@ -18,7 +20,7 @@ npm install
 
 ## Testing the project
 
-to test the project use
+to test the project use:
 
 ```bash
 npm run dev
@@ -31,13 +33,13 @@ npm run dev -- --open
 
 ## Building the project
 
-to create a production ready version of the project use
+to create a production ready version of the project use:
 
 ```bash
 npm run build
 ```
 
-you can preview the production build by using
+you can preview the production build by using:
 
 ```bash
 npm run preview
